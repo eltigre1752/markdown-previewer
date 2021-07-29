@@ -8,7 +8,6 @@ import {
   faArrowsAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -55,7 +54,7 @@ class App extends React.Component {
           <Editor markdown={this.state.markdown} onChange={this.handleChange} />
         </div>
 
-        <div className = {classes[1]}>
+        <div className={classes[1]}>
           <ToolBar
             icon={classes[2]}
             onClick={this.handlePreviewMaximize}
@@ -73,7 +72,11 @@ const ToolBar = (props) => {
     <div className="toolbar">
       <FontAwesomeIcon className="ico" icon={faGrin} />
       {props.text}
-      <FontAwesomeIcon className="ico ico2" icon={props.icon} onClick={props.onClick} />
+      <FontAwesomeIcon
+        className="ico ico2"
+        icon={props.icon}
+        onClick={props.onClick}
+      />
     </div>
   );
 };
