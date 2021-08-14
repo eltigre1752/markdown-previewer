@@ -1,0 +1,167 @@
+@import url("https://fonts.googleapis.com/css?family=Russo+One");
+$darkAccent: #224b4b;
+$lightAccent: #2cda9d;
+$backgroundBase: #619e9e;
+$shadow: 1px 1px 10px 2px darken($backgroundBase, 20%);
+$default-border: 1px solid darken($backgroundBase, 35%);
+
+// Clolor scheme
+.colorScheme {
+  background-color: lighten($backgroundBase, 30%);
+  border: $default-border;
+  box-shadow: $shadow;
+  border-top: none;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+/* 980px / 16px = 61.25em*/
+@media (max-width: 75em) {
+  html {
+    font-size: 60%;
+  }
+}
+
+/* 980px / 16px = 61.25em */
+@media (max-width: 61.25em) {
+  html {
+    font-size: 58%;
+  }
+}
+
+/* 560px / 16px = 35em */
+@media (max-width: 35em) {
+  html {
+    font-size: 55%;
+  }
+}
+
+body {
+  background: lighten($backgroundBase, 12%);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.8rem; //18px
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 1rem 0;
+}
+
+.toolbar {
+  background-color: lighten($darkAccent, 25%);
+  border: $default-border;
+  box-shadow: $shadow;
+  font-family: Russo One;
+  font-size: 1.8rem;
+  color: #16026e;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+
+  .ico {
+    width: 35px;
+    font-size: 3rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .ico2 {
+    margin-left: auto;
+  }
+
+  .ico2:hover {
+    color: lighten($lightAccent, 10%);
+    cursor: pointer;
+  }
+}
+
+.editorWrap {
+  max-width: 37em;
+  margin: 1rem auto;
+
+  textarea {
+    @extend .colorScheme;
+    width: 96.7%;
+    min-height: 14em;
+    padding: 1rem;
+    resize: vertical;
+    font-size: 1.5rem;
+    outline: none;
+  }
+}
+
+.previewWrap {
+  @extend .colorScheme;
+  max-width: 50em;
+  min-height: 12.5em;
+  margin: 1rem auto;
+  overflow-wrap: break-word;
+}
+
+.maximized {
+  min-height: 96vh;
+  margin: auto;
+
+  textarea {
+    min-height: 92vh;
+    margin: auto;
+    resize: none;
+  }
+}
+
+.hide {
+  display: none;
+}
+
+/*
+* Preview Styles
+*/
+#preview {
+  padding: 0 1rem;
+
+  blockquote {
+    border-left: 3px solid #224b4b;
+    color: #224b4b;
+    padding-left: 0.5rem;
+    margin-left: 2.5rem;
+  }
+
+  > p > code {
+    padding: 3px;
+  }
+
+  code {
+    background: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  pre {
+    display: block;
+    overflow: auto;
+    background: white;
+    line-height: 1.2;
+    padding: 0.5 rem;
+  }
+
+  h1 {
+    border-bottom: 2px solid $darkAccent;
+  }
+
+  h2 {
+    border-bottom: 1px solid $darkAccent;
+  }
+
+  table {
+    border-collapse: collapse;
+  }
+
+  td,
+  th {
+    border: 2px solid $darkAccent;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}

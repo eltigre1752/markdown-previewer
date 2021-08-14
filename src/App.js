@@ -1,21 +1,20 @@
-import "./App.scss";
+import "./styles/App.scss";
 import React from "react";
-import marked from "marked";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGrin,
-  faCompress,
-  faArrowsAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import ToolBar from "./ToolBar";
+import Preview from "./Preview";
+import Editor from "./Editor";
+import { faCompress, faArrowsAlt } from "@fortawesome/free-solid-svg-icons";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       markdown: placeholder,
       editorMaximized: false,
       previewMaximized: false,
     };
+
     this.handleChange = this.handleChange.bind(this);
     this.handleEditorMaximize = this.handleEditorMaximize.bind(this);
     this.handlePreviewMaximize = this.handlePreviewMaximize.bind(this);
@@ -32,24 +31,26 @@ class App extends React.Component {
       editorMaximized: !this.state.editorMaximized,
     });
   }
+
   handlePreviewMaximize() {
     this.setState({
       previewMaximized: !this.state.previewMaximized,
     });
   }
+
   render() {
     const classes = this.state.editorMaximized
-      ? ["editorWrap maximized", "previewWrap hide", faCompress]
+      ? ["editorWrap maximized", "hide", faCompress] // maximized editor, hide preview
       : this.state.previewMaximized
-      ? ["editorWrap hide", "previewWrap maximized", faCompress]
-      : ["editorWrap", "previewWrap", faArrowsAlt];
+      ? ["hide", "previewWrap maximized", faCompress] // hide editor, maximized preview
+      : ["editorWrap", "previewWrap", faArrowsAlt]; // show editor, show preview
     return (
       <div>
         <div className={classes[0]}>
           <ToolBar
             icon={classes[2]}
             onClick={this.handleEditorMaximize}
-            text="Editor"
+            text="Hong Van's Editor"
           />
           <Editor markdown={this.state.markdown} onChange={this.handleChange} />
         </div>
@@ -58,7 +59,7 @@ class App extends React.Component {
           <ToolBar
             icon={classes[2]}
             onClick={this.handlePreviewMaximize}
-            text="Previewer"
+            text="Hong Van's Previewer"
           />
           <Preview markdown={this.state.markdown} />
         </div>
@@ -67,83 +68,45 @@ class App extends React.Component {
   }
 }
 
-const ToolBar = (props) => {
-  return (
-    <div className="toolbar">
-      <FontAwesomeIcon className="ico" icon={faGrin} />
-      {props.text}
-      <FontAwesomeIcon
-        className="ico ico2"
-        icon={props.icon}
-        onClick={props.onClick}
-      />
-    </div>
-  );
-};
+const placeholder = `# Welcome to my Markdown Previewer!
 
-const Editor = (props) => {
-  return (
-    <div>
-      <textarea
-        id="editor"
-        onChange={props.onChange}
-        type="text"
-        value={props.markdown}
-      />
-    </div>
-  );
-};
+## This is a sub-heading
+### And this is a smaler sub-heading  
 
-const Preview = (props) => {
-  return (
-    <div
-      dangerouslySetInnerHTML={{
-        __html: marked(props.markdown),
-      }}
-      id="preview"
-    />
-  );
-};
-
-const placeholder = `# Welcome to my React Markdown Previewer!
-
-## This is a sub-heading...
-### And here's some other cool stuff:
-
-Heres some code, \`<div></div>\`, between 2 backticks.
+This is some code, \`<div></div>\`, between 2 backticks.
 
 \`\`\`
-// this is multi-line code:
+// This is multi-line code:
 
-function anotherExample(firstLine, lastLine) {
-  if (firstLine == '\`\`\`' && lastLine == '\`\`\`') {
-    return multiLineCode;
+function Example(props) {
+  if (props == '\`\`\`') {
+    return props;
   }
 }
 \`\`\`
 
-You can also make text **bold**... whoa!
+You can make text **bold**...
 Or _italic_.
-Or... wait for it... **_both!_**
-And feel free to go crazy ~~crossing stuff out~~.
+Or... **_both!_**
+And ~~crossing text~~.
 
-There's also [links](https://www.freecodecamp.org), and
+This is a [links](https://www.facebook.com/), and this is
 > Block Quotes!
 
-And if you want to get really crazy, even tables:
+This is a table:
 
-Wild Header | Crazy Header | Another Header?
+A Header | B Header | C Header
 ------------ | ------------- | -------------
-Your content can | be here, and it | can be here....
-And here. | Okay. | I think we get it.
+Your content | Your content  | Your content
+content A | content B | content C
 
-- And of course there are lists.
-  - Some are bulleted.
-     - With different indentation levels.
-        - That look like this.
+- And this is a lists.
+  - Bulleted.
+     - 3rd level.
+        - 4th level.
 
 
-1. And there are numbered lists too.
-1. yeah this is the end of demo!`;
+1. This is numbered lists.
+1. This is the end of demo!`;
 
 export default App;
